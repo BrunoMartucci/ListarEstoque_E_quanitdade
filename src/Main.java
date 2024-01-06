@@ -1,16 +1,50 @@
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+        String[] descricoes = new String[5];
+        int[] estoques = new int[5];
+
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Digite a descrição do produto " + (i + 1) + ": ");
+            descricoes[i] = scanner.nextLine();
+
+            System.out.println("Digite o estoque do produto " + (i + 1) + ": ");
+            estoques[i] = scanner.nextInt();
+            scanner.nextLine();
+        }
+
+
+        ordenarPorEstoque(descricoes, estoques);
+
+
+        System.out.println("\nProdutos ordenados por estoque em ordem crescente:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(descricoes[i] + " - Estoque: " + estoques[i]);
+        }
+
+        scanner.close();
+    }
+
+
+    private static void ordenarPorEstoque(String[] descricoes, int[] estoques) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4 - i; j++) {
+                if (estoques[j] > estoques[j + 1]) {
+                    // Trocar posições
+                    int tempEstoque = estoques[j];
+                    estoques[j] = estoques[j + 1];
+                    estoques[j + 1] = tempEstoque;
+
+                    String tempDescricao = descricoes[j];
+                    descricoes[j] = descricoes[j + 1];
+                    descricoes[j + 1] = tempDescricao;
+                }
+            }
         }
     }
 }
